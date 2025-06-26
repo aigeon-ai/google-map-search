@@ -1,51 +1,41 @@
+```markdown
 # Aigeon AI Google Map Search
 
-## Overview
-
-Aigeon AI Google Map Search is a Python-based server application designed to facilitate the scraping of Google Maps data using the SerpApi service. This tool allows users to perform detailed searches on Google Maps by leveraging various query parameters, providing a flexible and powerful means to extract location-based information programmatically.
+Aigeon AI Google Map Search is a Python-based server application designed to facilitate the scraping of Google Maps data. This tool leverages the SerpApi service to perform detailed searches on Google Maps, providing users with the ability to customize their search queries using various parameters.
 
 ## Features Overview
 
-- **Google Maps Data Scraping**: The application enables users to scrape data from Google Maps using a variety of search parameters.
-- **Flexible Query Parameters**: Supports multiple parameters such as query string, location coordinates, Google domain, country, language, pagination, and caching options.
-- **Integration with SerpApi**: Utilizes SerpApi to fetch Google Maps search results, ensuring reliable and up-to-date data retrieval.
-- **Asynchronous Search Capability**: Offers the option to perform searches asynchronously, allowing users to retrieve results at a later time.
+- **Google Maps Data Scraping**: Efficiently scrape data from Google Maps using the SerpApi service.
+- **Customizable Search Queries**: Tailor your search queries with various parameters such as location, language, and domain.
+- **Pagination Support**: Navigate through search results with pagination options.
+- **Cache Management**: Control caching behavior to optimize search performance and manage API usage.
+- **Asynchronous Search Submission**: Optionally submit searches asynchronously to retrieve results at a later time.
 
 ## Main Features and Functionality
 
-1. **Search Functionality**: The core feature of the application is the ability to perform searches on Google Maps. Users can define their search queries using a variety of parameters to tailor the results to their specific needs.
+The application is built around a single primary function that interacts with the SerpApi to perform Google Maps searches. This function is designed to be flexible and customizable, allowing users to specify a wide range of parameters to refine their search results.
 
-2. **Parameter Customization**: The application supports a wide range of parameters:
-   - **Query (`q`)**: Defines the search query, similar to a regular Google Maps search.
-   - **Location (`ll`)**: Specifies the GPS coordinates and zoom level for the search origin.
-   - **Google Domain (`google_domain`)**: Allows selection of a specific Google domain for the search.
-   - **Country (`gl`)**: Sets the country context for the search using a two-letter country code.
-   - **Language (`hl`)**: Determines the language for the search results using a two-letter language code.
-   - **Pagination (`start`)**: Manages result pagination by skipping a specified number of results.
-   - **Cache Control (`no_cache`)**: Controls whether to use cached results or force a fresh fetch from SerpApi.
-   - **Asynchronous Search (`aasync`)**: Enables submitting searches asynchronously for later retrieval.
+### Main Function: `search_map`
 
-3. **Integration with SerpApi**: The application interfaces with SerpApi to perform the actual data retrieval, ensuring that the results are accurate and up-to-date.
+The `search_map` function is the core of the application, enabling users to perform searches on Google Maps with a variety of customizable parameters. Below is a detailed description of its parameters:
 
-4. **Server Execution**: The application runs as a server using the FastMCP framework, allowing it to handle requests and process searches efficiently.
+- **`q`**: (string) The query parameter defines the search term you want to use, similar to a regular Google Maps search.
+  
+- **`ll`**: (string, optional) Specifies the GPS coordinates for the search origin. The format should be `@latitude,longitude,zoom`, where the zoom level ranges from 3 (zoomed out) to 21 (zoomed in).
 
-## Main Functions Description
+- **`google_domain`**: (string, optional) Defines the Google domain to use for the search, defaulting to `google.com`. Users can specify other domains based on their needs.
 
-### `search_map`
+- **`gl`**: (string, optional) Sets the country code for the search, allowing users to target specific geographical regions.
 
-This function is the primary tool for interacting with Google Maps data. It constructs a payload based on the provided parameters and sends a request to the SerpApi endpoint to retrieve search results. The function supports the following parameters:
+- **`hl`**: (string, optional) Determines the language for the search results, using a two-letter language code.
 
-- **`q`**: The search query string.
-- **`ll`**: The GPS coordinates and zoom level for the search.
-- **`google_domain`**: The Google domain to use for the search.
-- **`gl`**: The country code for the search context.
-- **`hl`**: The language code for the search results.
-- **`start`**: The result offset for pagination.
-- **`no_cache`**: A boolean to control cache usage.
-- **`aasync`**: A boolean to enable asynchronous search submission.
+- **`start`**: (int, optional) Manages result pagination by specifying the result offset. On desktop, this should be a multiple of 20, while on mobile, it should be a multiple of 10.
 
-The function constructs a request payload, filters out any `None` values, and sends a GET request to the SerpApi endpoint. The response is returned in JSON format, providing the search results.
+- **`no_cache`**: (bool, optional) Controls whether to use cached results. Setting this to `true` forces a fresh fetch from SerpApi, bypassing any cached results.
 
----
+- **`aasync`**: (bool, optional) Defines the submission mode for the search. When set to `true`, the search is submitted asynchronously, allowing results to be retrieved later via the Searches Archive API.
 
-This documentation provides a comprehensive overview of the Aigeon AI Google Map Search application, detailing its features, functionality, and primary operations. For more detailed usage and examples, please refer to the source code and accompanying documentation.
+The function constructs a payload with the provided parameters and sends a GET request to the SerpApi endpoint. The response is returned in JSON format, containing the search results.
+
+This tool is ideal for developers and data analysts looking to integrate Google Maps data into their applications or perform detailed geographic data analysis.
+```
