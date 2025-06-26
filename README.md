@@ -1,54 +1,51 @@
-```markdown
 # Aigeon AI Google Map Search
 
-Aigeon AI Google Map Search is a Python-based server application designed to facilitate the scraping of Google Maps data using the SerpApi service. This application leverages the FastMCP framework to provide a robust and efficient tool for querying and retrieving location-based information from Google Maps.
+## Overview
+
+Aigeon AI Google Map Search is a Python-based server application designed to facilitate the scraping of Google Maps data using the SerpApi service. This tool allows users to perform detailed searches on Google Maps by leveraging various query parameters, providing a flexible and powerful means to extract location-based information programmatically.
 
 ## Features Overview
 
-- **Google Maps Data Scraping**: The application is capable of scraping data from Google Maps using the SerpApi service.
-- **Flexible Query Parameters**: Supports a wide range of query parameters to customize searches, including location coordinates, language, and country settings.
-- **Pagination Support**: Allows for result pagination to navigate through multiple pages of search results.
-- **Cache Management**: Offers options to utilize cached results or force fresh data retrieval.
-- **Asynchronous Search Submission**: Provides the ability to submit searches asynchronously, optimizing performance and resource usage.
+- **Google Maps Data Scraping**: The application enables users to scrape data from Google Maps using a variety of search parameters.
+- **Flexible Query Parameters**: Supports multiple parameters such as query string, location coordinates, Google domain, country, language, pagination, and caching options.
+- **Integration with SerpApi**: Utilizes SerpApi to fetch Google Maps search results, ensuring reliable and up-to-date data retrieval.
+- **Asynchronous Search Capability**: Offers the option to perform searches asynchronously, allowing users to retrieve results at a later time.
 
 ## Main Features and Functionality
 
-### Google Maps Search
+1. **Search Functionality**: The core feature of the application is the ability to perform searches on Google Maps. Users can define their search queries using a variety of parameters to tailor the results to their specific needs.
 
-The core functionality of the application is to perform searches on Google Maps using the SerpApi. The `search_map` function serves as the primary tool for executing these searches. It accepts several parameters to customize the search:
+2. **Parameter Customization**: The application supports a wide range of parameters:
+   - **Query (`q`)**: Defines the search query, similar to a regular Google Maps search.
+   - **Location (`ll`)**: Specifies the GPS coordinates and zoom level for the search origin.
+   - **Google Domain (`google_domain`)**: Allows selection of a specific Google domain for the search.
+   - **Country (`gl`)**: Sets the country context for the search using a two-letter country code.
+   - **Language (`hl`)**: Determines the language for the search results using a two-letter language code.
+   - **Pagination (`start`)**: Manages result pagination by skipping a specified number of results.
+   - **Cache Control (`no_cache`)**: Controls whether to use cached results or force a fresh fetch from SerpApi.
+   - **Asynchronous Search (`aasync`)**: Enables submitting searches asynchronously for later retrieval.
 
-- **Query (`q`)**: The main search query, similar to what you would use in a regular Google Maps search.
-- **Location Coordinates (`ll`)**: Specifies the GPS coordinates to originate the search from, formatted as `@latitude,longitude,zoom`.
-- **Google Domain (`google_domain`)**: Defines the Google domain to use for the search, defaulting to `google.com`.
-- **Country (`gl`)**: Sets the country context for the search using a two-letter country code.
-- **Language (`hl`)**: Determines the language for the search results using a two-letter language code.
-- **Result Offset (`start`)**: Used for pagination, allowing the skipping of a specified number of results.
-- **Cache Control (`no_cache`)**: Controls whether to use cached results or fetch new data.
-- **Asynchronous Execution (`aasync`)**: Specifies whether to perform the search asynchronously.
+3. **Integration with SerpApi**: The application interfaces with SerpApi to perform the actual data retrieval, ensuring that the results are accurate and up-to-date.
 
-### API Endpoints or Main Functions Description
+4. **Server Execution**: The application runs as a server using the FastMCP framework, allowing it to handle requests and process searches efficiently.
 
-#### `search_map`
+## Main Functions Description
 
-This function is the primary entry point for executing Google Maps searches. It constructs a request payload based on the provided parameters and sends a GET request to the SerpApi endpoint. The response is returned in JSON format, containing the search results.
+### `search_map`
 
-- **Parameters**:
-  - `q`: The search query string.
-  - `ll`: Optional GPS coordinates for search origin.
-  - `google_domain`: Optional Google domain for the search.
-  - `gl`: Optional country code for the search.
-  - `hl`: Optional language code for the search.
-  - `start`: Optional result offset for pagination.
-  - `no_cache`: Optional boolean to control cache usage.
-  - `aasync`: Optional boolean for asynchronous search submission.
+This function is the primary tool for interacting with Google Maps data. It constructs a payload based on the provided parameters and sends a request to the SerpApi endpoint to retrieve search results. The function supports the following parameters:
 
-- **Returns**: JSON response containing the search results from Google Maps.
+- **`q`**: The search query string.
+- **`ll`**: The GPS coordinates and zoom level for the search.
+- **`google_domain`**: The Google domain to use for the search.
+- **`gl`**: The country code for the search context.
+- **`hl`**: The language code for the search results.
+- **`start`**: The result offset for pagination.
+- **`no_cache`**: A boolean to control cache usage.
+- **`aasync`**: A boolean to enable asynchronous search submission.
 
-### Execution
-
-The server is designed to run using the FastMCP framework, which handles the transport and execution of the `search_map` tool. By default, the server listens on port 9997, but this can be customized via command-line arguments.
+The function constructs a request payload, filters out any `None` values, and sends a GET request to the SerpApi endpoint. The response is returned in JSON format, providing the search results.
 
 ---
 
-This README provides an overview of the Aigeon AI Google Map Search application, detailing its features, functionality, and usage. For further details on configuration and deployment, please refer to the source code and accompanying documentation.
-```
+This documentation provides a comprehensive overview of the Aigeon AI Google Map Search application, detailing its features, functionality, and primary operations. For more detailed usage and examples, please refer to the source code and accompanying documentation.
